@@ -16,7 +16,7 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
-                    <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
+                    <a href="{% url 'payapp:dashboard' %}" class="img logo rounded-circle mb-5" style="background-image: url({% static 'images/auth/logo.jpg' %});"></a>
                     <ul class="list-unstyled components mb-5">
                         <li class="{% if request.path == '/make_payment' %}active{% endif %}">
                             <a href="{% url 'payapp:make_payment' %}">Send Money</a>
