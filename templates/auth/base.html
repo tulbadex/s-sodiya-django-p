@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>{% block title%}WebApp Dashboard{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{% static 'css/auth/style.css' %}">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+                    <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
+                    <ul class="list-unstyled components mb-5">
+                        <li class="{% if request.path == '/make_payment' %}active{% endif %}">
+                            <a href="{% url 'payapp:make_payment' %}">Send Money</a>
+                        </li>
+                        <li class="{% if request.path == '/request_payments' %}active{% endif %}">
+                            <a href="{% url 'payapp:request_payments' %}">Request Money</a>
+                        </li>
+                        <li class="{% if request.path == '/transactions' %}active{% endif %}">
+                            <a href="{% url 'payapp:transactions' %}" >Transaction History</a>
+                        </li>
+
+                        <li class="{% if request.path == '/notification' %}active{% endif %}">
+                            <a href="{% url 'payapp:notification' %}" >Notification</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'logout' %}" >Logout</a>
+                        </li>
+                    </ul>
+
+                    <div class="footer">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved  <i class="icon-heart" aria-hidden="true"></i> by WEBapp
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+
+                </div>
+            </nav>
+
+            {% block content %}
+            {% endblock %}
+		</div>
+
+    <script src="{% static 'js/auth/jquery.min.js' %}"></script>
+    <script src="{% static 'js/auth/popper.js' %}"></script>
+    <script src="{% static 'js/auth/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/auth/main.js' %}"></script>
+  </body>
+</html>

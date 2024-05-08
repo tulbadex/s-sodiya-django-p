@@ -1,0 +1,58 @@
+{% extends 'auth/base.html' %}
+{% load static %}
+
+{% block title%}WEBapp Dashboard Send Money{% endblock %}
+
+{% block content %}
+
+    <div id="content" class="p-4 p-md-5">
+
+        <h2 class="mb-4">Payment Request</h2>
+
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endif %}
+
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for request, currency_symbol in pending_requests_with_symbols %}
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Payment Request from: {{ request.sender.username }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Amount: {{ currency_symbol  }} {{ request.amount }}</h6>
+                        <div class="d-flex align-items-start gap-4">
+                            <div class="mr-2">
+                                <form action="{% url 'payapp:handle_payment_request' request.id 'accept' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Accept</button>
+                                </form>
+                            </div>
+        
+                            <div>
+                                <form action="{% url 'payapp:handle_payment_request' request.id 'reject' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

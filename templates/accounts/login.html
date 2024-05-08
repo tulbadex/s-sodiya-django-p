@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-12 card">
+            <div class="card-body">
+                <h2 class="card-title">Log In</h2>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Log In</button>
+                    </div>
+                    
+                </form>
+                <div class="mt-4">
+                    <a class="btn header_section text-white" role="button" href="{% url 'signup' %}">Register</a>
+                    <a class="btn header_section text-white" role="button" href="{% url 'reset_password' %}">Password Reset</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

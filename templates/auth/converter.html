@@ -1,0 +1,76 @@
+{% extends 'auth/base.html' %}
+{% load static %}
+
+{% block title%}WEBapp Dashboard Currency Converter{% endblock %}
+
+{% block content %}
+
+    <div id="content" class="p-4 p-md-5">
+
+        <h2 class="mb-4">Your Account</h2>
+
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endif %}
+
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Convert From</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{ data.currency1 }}</p>
+                    </div>
+                </div>
+              <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Convert to</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{ data.currency2 }}</p>
+                    </div>
+                </div>
+              <hr>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Converted Amount</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ data.amount }}</p>
+                    </div>
+                </div>
+              <hr>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Converted Amount To</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{ data.currency2 }}{{ data.converted_to }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+
+{% endblock %}
